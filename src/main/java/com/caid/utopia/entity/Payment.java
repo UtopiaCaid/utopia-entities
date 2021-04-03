@@ -24,7 +24,7 @@ import org.springframework.lang.NonNull;
  */
 @Entity
 @Table(name = "tbl_payments")
-public class Payments implements Serializable {
+public class Payment implements Serializable {
 
 
 
@@ -40,7 +40,7 @@ public class Payments implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "account_number")
-	private Accounts accounts;
+	private Account accounts;
 
 	@Column(name = "date_processed")
 	@NonNull
@@ -62,13 +62,49 @@ public class Payments implements Serializable {
 		this.dateProcessed = dateProcessed;
 	}
 	
-	public Accounts getAccounts() {
+	public Account getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(Accounts accounts) {
+	public void setAccounts(Account accounts) {
 		this.accounts = accounts;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accounts == null) ? 0 : accounts.hashCode());
+		result = prime * result + ((dateProcessed == null) ? 0 : dateProcessed.hashCode());
+		result = prime * result + ((paymentId == null) ? 0 : paymentId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		if (accounts == null) {
+			if (other.accounts != null)
+				return false;
+		} else if (!accounts.equals(other.accounts))
+			return false;
+		if (dateProcessed == null) {
+			if (other.dateProcessed != null)
+				return false;
+		} else if (!dateProcessed.equals(other.dateProcessed))
+			return false;
+		if (paymentId == null) {
+			if (other.paymentId != null)
+				return false;
+		} else if (!paymentId.equals(other.paymentId))
+			return false;
+		return true;
 	}
 	
 }
-

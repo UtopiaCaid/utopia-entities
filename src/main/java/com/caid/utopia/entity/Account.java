@@ -24,7 +24,7 @@ import org.springframework.lang.NonNull;
  */
 @Entity
 @Table(name = "tbl_accounts")
-public class Accounts implements Serializable {
+public class Account implements Serializable {
 
 
 	/**
@@ -39,7 +39,7 @@ public class Accounts implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "role_id")
-	private AccountRoles role;
+	private AccountRole role;
 	
 	@Column(name = "username", length = 45)
 	@NonNull
@@ -65,11 +65,11 @@ public class Accounts implements Serializable {
 		this.accountNumber = accountNumber;
 	}
 
-	public AccountRoles getRoleId() {
+	public AccountRole getRole() {
 		return role;
 	}
 
-	public void setRoleId(AccountRoles role) {
+	public void setRole(AccountRole role) {
 		this.role = role;
 	}
 
@@ -103,6 +103,61 @@ public class Accounts implements Serializable {
 
 	public void setDateCreated(LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (accountNumber == null) {
+			if (other.accountNumber != null)
+				return false;
+		} else if (!accountNumber.equals(other.accountNumber))
+			return false;
+		if (dateCreated == null) {
+			if (other.dateCreated != null)
+				return false;
+		} else if (!dateCreated.equals(other.dateCreated))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 
 

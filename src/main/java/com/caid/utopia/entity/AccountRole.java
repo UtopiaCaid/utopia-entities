@@ -21,7 +21,7 @@ import org.springframework.lang.NonNull;
  */
 @Entity
 @Table(name = "tbl_account_roles")
-public class AccountRoles implements Serializable {
+public class AccountRole implements Serializable {
 
 
 	/**
@@ -52,6 +52,37 @@ public class AccountRoles implements Serializable {
 
 	public void setRoleType(String roleType) {
 		this.roleType = roleType;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((roleId == null) ? 0 : roleId.hashCode());
+		result = prime * result + ((roleType == null) ? 0 : roleType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountRole other = (AccountRole) obj;
+		if (roleId == null) {
+			if (other.roleId != null)
+				return false;
+		} else if (!roleId.equals(other.roleId))
+			return false;
+		if (roleType == null) {
+			if (other.roleType != null)
+				return false;
+		} else if (!roleType.equals(other.roleType))
+			return false;
+		return true;
 	}
 	
 	
