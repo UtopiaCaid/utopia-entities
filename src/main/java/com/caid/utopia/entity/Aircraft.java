@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.caid.utopia.entity;
 
 import java.io.Serializable;
